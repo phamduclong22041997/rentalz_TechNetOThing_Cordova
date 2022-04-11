@@ -19,12 +19,12 @@
         return isValid;
     }
 
-    function getPropertyData(filters) {
+    function getActivityData(filters) {
         const validData = [];
-        const propertyData = JSON.parse(localStorage.getItem('propertyData')) || '';
-        for (const i in propertyData) {
-            if (propertyData[i]) {
-                const data = propertyData[i];
+        const activityData = JSON.parse(localStorage.getItem('activityData')) || '';
+        for (const i in activityData) {
+            if (activityData[i]) {
+                const data = activityData[i];
                 const isDataMatchFilter = checkIsMatchFilter(data, filters);
                 if (isDataMatchFilter) {
                     validData.push(data);
@@ -93,7 +93,7 @@
     function initData() {
         const filterSearch = getStorageData('filterSearch');
         if (filterSearch) {
-            const matchData = getPropertyData(filterSearch);
+            const matchData = getActivityData(filterSearch);
             appendDataToHTML(matchData);
         }
     }

@@ -1,29 +1,16 @@
 (function (document, window) {
     window.CONSTANT_DATA = {
-        room: {
-            '1': '1',
-            '2': '2',
-            '3': '3',
-            '4': '4'
-        },
-        type: {
-            '1': 'Apartment',
-            '2': 'Hotel',
-            '3': 'Motel'
-        },
         furniture: {
             '1': 'Furniture',
             '2': 'Incomplete',
             '3': 'Partly Equipped'
         },
         LOCALE_VI: {
-            name: 'Attribute name',
-            address: 'Address',
-            type: 'Type of real estate',
-            room: 'Bedroom',
-            createdAt: 'Create date',
-            pricePerMonth: 'Monthly rental price',
-            furniture: 'Types of furniture'
+            name: 'Activity name',
+            address: 'Location',
+            createdAt: 'Date',
+            timeOfAttending: 'Time of attending',
+            reporter : 'Name of the reporter'
         }
     };
     window.formatNumberToMoney = function(num) {

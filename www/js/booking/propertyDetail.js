@@ -5,7 +5,7 @@
     }
 
     function getPropertyList() {
-        return getStorageData('propertyData');
+        return getStorageData('activityData');
     }
 
     function getOne(index, data) {
@@ -33,7 +33,7 @@
                 break;
             }
         }
-        localStorage.setItem('propertyData', JSON.stringify(properties));
+        localStorage.setItem('activityData', JSON.stringify(properties));
         window.location.href = './Search.html';
     }
 
@@ -43,8 +43,8 @@
         headerContent += `<div class="astro">
             <img src="images/propertyDetail/${data['index']}.jpg" class="img-responsive" alt="image1" title="image1" />
             <div class="caption">
-                <h3>Property name: ${data['name']}</h3>
-                <h5><i class="icon_pencil-edit"></i>${data['noted']}</h5>
+                <h3>Activity Name: ${data['name']}</h3>
+                <h5><i class="icon_pencil-edit"></i>${data['reporter']}</h5>
             </div>
             <div>
                 <input id="update-detail" number="${data['index']}" type="button" value="Update" />
@@ -60,30 +60,29 @@
             }
         });
         $('#delete-detail').on('click', function (ele) {
-            const propertyData = JSON.parse(localStorage.getItem('propertyData')) || '';
+            const activityData = JSON.parse(localStorage.getItem('activityData')) || '';
             const currentIndex = getStorageData('selectPropertyIndex');
-            deleteProperty(currentIndex, propertyData);
+            deleteProperty(currentIndex, activityData);
         });
 
         let footerContent = '<ul class="list-unstyled">';
         footerContent += `<li>
-                <p>Property address<span>${data.address}</span></p>
+                <p>Location<span>${data.address}</span></p>
+            </li>
+      
+    
+            <li>
+                <p>Date<span>${window.formatDate(data.createdAt)}</span></p>
             </li>
             <li>
-                <p>Property type<span>${window.CONSTANT_DATA.type[data.type]}</span></p>
+                <p>Time Of Attending<span>${window.formatNumberToMoney(data.timeOfAttending)}</span></p>
             </li>
+       
             <li>
-                <p>Number Rooms<span>${window.CONSTANT_DATA.room[data.room]}</span></p>
-            </li>
-            <li>
-                <p>Create Date<span>${window.formatDate(data.createdAt)}</span></p>
-            </li>
-            <li>
-                <p>Price Per Month<span>${window.formatNumberToMoney(data.pricePerMonth)}</span></p>
-            </li>
-            <li>
-                <p>Furniture<span>${window.CONSTANT_DATA.furniture[data.furniture]}</span></p>
-            </li>`
+            <p>${window.CONSTANT_DATA.LOCALE_VI.reporter}<span>${data.reporter}</span></p>
+          </li>
+            `
+
         footerContent += '</ul>';
         $('#footer-detail .detail').append(footerContent);
     }

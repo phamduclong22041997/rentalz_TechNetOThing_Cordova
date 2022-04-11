@@ -6,12 +6,9 @@
         constructor() {
             this.name = $('#name').val() || '';
             this.address = $('#address').val() || '';
-            this.type = $('#type').val() || '';
-            this.room = $('#room').val() || '';
             this.createdAt = $('#createdAt').val() || '';
-            this.pricePerMonth = $('#pricePerMonth').val() || '';
-            this.furniture = $('#furniture').val() || '';
-            this.noted = $('#noted').val() || '';
+            this.timeOfAttending = $('#timeOfAttending').val() || '';
+            this.reporter = $('#reporter').val() || '';
         }
         getPropertyInfo() {
             let convertTimeStamp = '';
@@ -21,12 +18,9 @@
             return {
                 name: this.name,
                 address: this.address,
-                type: this.type,
-                room: this.room,
-                createdAt: convertTimeStamp, // this.createdAt,
-                pricePerMonth: this.pricePerMonth,
-                furniture: this.furniture,
-                noted: this.noted
+                createdAt: convertTimeStamp, 
+                timeOfAttending: this.timeOfAttending,
+                reporter: this.reporter
             }
         }
     }
@@ -69,17 +63,17 @@
     }
 
     function setDataLocalStorage(data) {
-        const propertyData = localStorage.getItem('propertyData') || '';
-        if (!propertyData) {
+        const activityData = localStorage.getItem('activityData') || '';
+        if (!activityData) {
             data['index'] = 1;
             const saveData = [data];
-            localStorage.setItem('propertyData', JSON.stringify(saveData));
+            localStorage.setItem('activityData', JSON.stringify(saveData));
         } else {
-            const currentProperties = JSON.parse(propertyData);
+            const currentProperties = JSON.parse(activityData);
             if (data) {
                 data['index'] = currentProperties.length + 1;
                 currentProperties.push(data);
-                localStorage.setItem('propertyData', JSON.stringify(currentProperties));
+                localStorage.setItem('activityData', JSON.stringify(currentProperties));
             }
         }
     }
@@ -90,7 +84,7 @@
         const isValidFormData = validateForm(propertyInfo);
         if (isValidFormData) {
             setDataLocalStorage(propertyInfo);
-            window.toastMessage('Create Property Success', 'success');
+            window.toastMessage('Create Activity Success', 'success');
         }
     }
 
