@@ -1,15 +1,12 @@
 (function (document, window) {
     class Property {
-        constructor() {
-            this.name = $('#name').val() || '';
-            this.address = $('#address').val() || '';
-            this.type = $('#type').val() || '';
-            this.room = $('#room').val() || '';
-            this.createdAt = $('#createdAt').val() || '';
-            this.pricePerMonth = $('#pricePerMonth').val() || '';
-            this.furniture = $('#furniture').val() || '';
-            this.noted = $('#noted').val() || '';
-        }
+            constructor() {
+                this.name = $('#name').val() || '';
+                this.address = $('#address').val() || '';
+                this.createdAt = $('#createdAt').val() || '';
+                this.timeOfAttending = $('#timeOfAttending').val() || '';
+                this.reporter = $('#reporter').val() || '';
+            }
         getPropertyInfo() {
             let convertTimeStamp = '';
             if (this.createdAt) {
@@ -18,12 +15,9 @@
             return {
                 name: this.name,
                 address: this.address,
-                type: this.type,
-                room: this.room,
-                createdAt: convertTimeStamp, // this.createdAt,
-                pricePerMonth: this.pricePerMonth,
-                furniture: this.furniture,
-                noted: this.noted
+                createdAt: convertTimeStamp, 
+                timeOfAttending: this.timeOfAttending,
+                reporter: this.reporter
             }
         }
     }
@@ -34,7 +28,7 @@
     }
 
     function getPropertyList() {
-        return getStorageData('propertyData');
+        return getStorageData('activityData');
     }
 
     function getOne(index, data) {
@@ -99,8 +93,8 @@
     }
 
     function update(index, data) {
-        const propertyData = localStorage.getItem('propertyData') || '';
-        let currentProperties = JSON.parse(propertyData);
+        const activityData = localStorage.getItem('activityData') || '';
+        let currentProperties = JSON.parse(activityData);
         for (const i in currentProperties) {
             if (currentProperties[i] &&
                 currentProperties[i]['index'] === index) {
@@ -108,7 +102,7 @@
                     ...currentProperties[i],
                     ...data
                 };
-                localStorage.setItem('propertyData', JSON.stringify(currentProperties));
+                localStorage.setItem('activityData', JSON.stringify(currentProperties));
             }
         }
     }
